@@ -8,8 +8,6 @@ lazy val thoughtseize: Project = Project("thoughtseize", file("."))
     scalaVersion := SCALA_3,
     organization := "com.miloszjakubanis",
     libraryDependencies ++= Seq(
-      "com.lihaoyi" %% "cask" % "0.7.11",
-      "commons-cli" % "commons-cli" % "1.4",
       "com.lihaoyi" %% "utest" % "0.7.10" % Test,
     ),
     testFrameworks += new TestFramework("utest.runner.Framework"),

@@ -1,3 +1,9 @@
+package com.miloszjakubanis.thoughtseize
+
+import java.nio.file.Paths
+
 @main def hello =
-  println("hello world")
-  val z: String | Null = null
+  val simple: LocationStrategy = SimpleLocationStrategy()
+  val docker: LocationStrategy = DockerLocationStrategy()
+  println(docker.location)
+  println(docker.dirExists)

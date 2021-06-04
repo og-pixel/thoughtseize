@@ -1,8 +1,7 @@
 package com.miloszjakubanis.thoughtseize
 
 import com.typesafe.config.ConfigFactory
-import com.miloszjakubanis.thoughtseize.ConfigLoader
-import com.miloszjakubanis.thoughtseize.location.LocationStrategy
+import com.miloszjakubanis.thoughtseize.location.Location
 import scala.collection.immutable
 
 

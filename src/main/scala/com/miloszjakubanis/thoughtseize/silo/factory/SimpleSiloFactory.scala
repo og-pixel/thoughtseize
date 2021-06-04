@@ -6,9 +6,6 @@ import com.miloszjakubanis.thoughtseize.id.factory.IDFactory
 import com.miloszjakubanis.thoughtseize.id.ID
 import scala.collection.mutable
 
-object SimpleSiloFactory:
-  def apply(silo: SimpleSilo): SimpleSilo = ???
-
 class SimpleSiloFactory extends SiloFactory[SimpleSilo]:
 
   private[this] val idFactory: IDFactory = SimpleIDFactory()

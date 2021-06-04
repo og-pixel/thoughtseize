@@ -7,7 +7,6 @@ import com.miloszjakubanis.thoughtseize.silo.Silo
 import java.io.File
 import scala.collection.mutable
 
-
 /**
   * One singular folder holding files inside, no nesting
   * Depends on a lock to keep everything in right order

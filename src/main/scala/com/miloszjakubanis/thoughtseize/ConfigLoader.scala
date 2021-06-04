@@ -1,4 +1,7 @@
 package com.miloszjakubanis.thoughtseize
 
-trait Silo[T]:
-  def getSiloContent: T
+
+
+
+object ConfigLoader:
+  val 1=1

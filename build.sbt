@@ -1,6 +1,7 @@
 lazy val SCALA_3 = "3.0.0"
 
 lazy val thoughtseize: Project = Project("thoughtseize", file("."))
+//  .enablePlugins(MdocPlugin)
   .settings(
     name := "Thoughtseize",
     organizationName := "Milosz Jakubanis",
@@ -8,6 +9,7 @@ lazy val thoughtseize: Project = Project("thoughtseize", file("."))
     scalaVersion := SCALA_3,
     organization := "com.miloszjakubanis",
     libraryDependencies ++= Seq(
+      "com.typesafe" % "config" % "1.4.1",
       "com.lihaoyi" %% "utest" % "0.7.10" % Test,
     ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
@@ -20,4 +22,5 @@ lazy val thoughtseize: Project = Project("thoughtseize", file("."))
       "-Ysafe-init",
       "-new-syntax",
     )
+    
   )

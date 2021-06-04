@@ -1,7 +1,7 @@
 package com.miloszjakubanis.thoughtseize.silo
 
-import com.miloszjakubanis.thoughtseize.factory.IDFactory
-import com.miloszjakubanis.thoughtseize.ID
+import com.miloszjakubanis.thoughtseize.id.factory.IDFactory
+import com.miloszjakubanis.thoughtseize.id.ID
 import com.miloszjakubanis.thoughtseize.silo.Silo
 
 import java.io.File

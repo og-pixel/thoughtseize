@@ -1,7 +1,9 @@
 package com.miloszjakubanis.thoughtseize.silo.factory
+
 import com.miloszjakubanis.thoughtseize.silo.{Silo, SimpleSilo}
-import com.miloszjakubanis.thoughtseize.factory.{IDFactory, SimpleIDFactory}
-import com.miloszjakubanis.thoughtseize.ID
+import com.miloszjakubanis.thoughtseize.id.factory.{IDFactory, SimpleIDFactory}
+import com.miloszjakubanis.thoughtseize.id.factory.IDFactory
+import com.miloszjakubanis.thoughtseize.id.ID
 import scala.collection.mutable
 
 object SimpleSiloFactory:

@@ -1,6 +1,6 @@
-package com.miloszjakubanis.thoughtseize.factory
+package com.miloszjakubanis.thoughtseize.id.factory
 
-import com.miloszjakubanis.thoughtseize.ID
+import com.miloszjakubanis.thoughtseize.id.ID
 
 class SimpleIDFactory extends IDFactory:
   var id: ID = 0

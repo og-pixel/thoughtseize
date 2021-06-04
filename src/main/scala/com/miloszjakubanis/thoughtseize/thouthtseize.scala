@@ -5,7 +5,6 @@ import com.miloszjakubanis.thoughtseize.ConfigLoader
 import com.miloszjakubanis.thoughtseize.location.LocationStrategy
 import scala.collection.immutable
 
-type ID = Long
 
 object ConfigValues:
 

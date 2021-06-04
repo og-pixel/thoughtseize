@@ -5,7 +5,7 @@ import com.miloszjakubanis.thoughtseize.silo.factory.{SiloFactory, SimpleSiloFac
 
 class DockerLocationStrategy(folderName: String = "filesystem") extends LocationStrategy[SimpleSilo](folderName):
 
-  // val factory: SiloFactory = SimpleSiloFactory()
+  val factory: SimpleSiloFactory = new SimpleSiloFactory() //TODO work on new/apply
 
   override lazy val location: String = s"/$folderName"
-  override lazy val silo: SimpleSilo = SimpleSilo(1, "das")//factory.silo()
+  override lazy val silo: SimpleSilo = factory.silo()

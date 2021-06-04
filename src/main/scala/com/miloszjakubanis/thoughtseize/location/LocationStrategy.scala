@@ -9,10 +9,10 @@ object LocationStrategy:
 
   private[this] val userHome = System.getProperty("user.home").nn
 
-  def getLocationStrategy(name: String): LocationStrategy[Silo[_, _]] =
+  def getLocationStrategy(name: String): LocationStrategy[_] =
     val a = name.toLowerCase.nn.trim.nn
      a match
-      // e "docker" => DockerLocationStrategy()
+      case "docker" => DockerLocationStrategy()
       case "simple" => SimpleLocationStrategy()
       case _ => SimpleLocationStrategy()
 

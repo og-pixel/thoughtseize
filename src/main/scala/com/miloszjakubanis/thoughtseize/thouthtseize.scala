@@ -7,25 +7,23 @@ import scala.collection.immutable
 
 type ID = Long
 
-package defaults {
+object ConfigValues:
 
-
-  val CONFIG_DEFAULTS = immutable.HashMap[String, String](
-    "config.location" -> "filesystem",
-    "config.location.docker" -> "docker",
+  //TODO first value is default
+  private[this] val CONFIG_DEFAULTS = immutable.HashMap[String, Array[String]](
+    "config.location" -> Array("simple", "docker"),
+    "config.user" -> Array("default"),
   )
 
-  // val USER_DEFAULTS = immutable.HashMap[String, String](
-  //   "a" -> "asda",
-  //   "b" -> "asda",
-  //   "c" -> "asda",
-  // )
+  private[this] val conf = ConfigFactory.load().nn
 
-  val conf = ConfigFactory.load().nn
+  //TODO made to throw erros on not getting defaults
+  //TODO breaks if config doesn't exists
+  def getOrDefault(key: String): String = 
+    conf.getString(key) match 
+      case s: String => 
+        if CONFIG_DEFAULTS(key).contains(s) then s
+        else CONFIG_DEFAULTS(key).nn(0).nn
+      case _ => CONFIG_DEFAULTS(key).nn(0).nn
 
-  val confLocation = conf.getString("config.location") match 
-    case a: String => a
-    case _ => CONFIG_DEFAULTS("config.location")
-
-  val location = LocationStrategy.getLocationStrategy(confLocation)
-}
+  def apply(key: String): String = getOrDefault(key)

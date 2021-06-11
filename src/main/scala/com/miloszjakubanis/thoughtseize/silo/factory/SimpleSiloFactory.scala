@@ -5,6 +5,7 @@ import com.miloszjakubanis.thoughtseize.id.factory.{IDFactory, SimpleIDFactory}
 import com.miloszjakubanis.thoughtseize.id.factory.IDFactory
 import com.miloszjakubanis.thoughtseize.id.ID
 import scala.collection.mutable
+import java.nio.file.Path
 
 class SimpleSiloFactory extends SiloFactory[SimpleSilo]:
 
@@ -12,6 +13,6 @@ class SimpleSiloFactory extends SiloFactory[SimpleSilo]:
 
   val map = mutable.HashMap[ID, String]()
 
-  def silo(): SimpleSilo = 
+  def silo(location: Path): SimpleSilo = 
     val id = idFactory.nextID()
-    SimpleSilo(id, id.toString)
+    SimpleSilo(id, location, id.toString)

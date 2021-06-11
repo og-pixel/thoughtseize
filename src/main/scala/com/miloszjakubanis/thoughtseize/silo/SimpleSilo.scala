@@ -6,6 +6,7 @@ import com.miloszjakubanis.thoughtseize.silo.Silo
 
 import java.io.File
 import scala.collection.mutable
+import java.nio.file.Path
 
 /**
   * One singular folder holding files inside, no nesting
@@ -13,10 +14,16 @@ import scala.collection.mutable
   */
 class SimpleSilo(
   val id: ID,
-  val siloName: String,
-) extends Silo[String, File]:
+  val location: Path,
+  private[this] val siloName: String,
+) extends Silo[ID, File]:
 
   // var lock: String = ""
   // var isLocked: Boolean = false
-  private[this] val children: mutable.HashMap[String, File] = mutable.HashMap()
-  def getSiloContent(key: String): File = children(key)
+  private[this] val children: mutable.HashMap[ID, File] = mutable.HashMap()
+  def getSiloContent(key: ID): File = children(key)
+  
+  def put(key: ID, value: File): Option[File] = 
+    children.put(key, value)
+
+  def remove(key: ID): Option[File] = ???

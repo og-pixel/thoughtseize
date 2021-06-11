@@ -11,3 +11,5 @@ import com.miloszjakubanis.thoughtseize.ConfigValues
 
   val location = Location(ConfigValues("config.location"))
   println(location.location)
+
+  location.silo(0)

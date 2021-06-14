@@ -1,11 +1,11 @@
 package com.miloszjakubanis.thoughtseize.location
 
-import com.miloszjakubanis.thoughtseize.silo.SimpleSilo
-import com.miloszjakubanis.thoughtseize.silo.factory.{SiloFactory, SimpleSiloFactory}
+import com.miloszjakubanis.thoughtseize.storage.SimpleStorage
+import com.miloszjakubanis.thoughtseize.storage.factory.{SiloFactory, SimpleSiloFactory}
 
-class DockerLocationStrategy(folderName: String = "filesystem") extends Location[SimpleSilo](folderName):
+class DockerLocationStrategy(folderName: String = "filesystem") extends Location[SimpleStorage](folderName):
 
   val factory: SimpleSiloFactory = new SimpleSiloFactory() //TODO work on new/apply
 
   override lazy val location: String = s"/$folderName"
-  override lazy val silo: SimpleSilo = factory.silo()
+  override lazy val silo: SimpleStorage = factory.silo()

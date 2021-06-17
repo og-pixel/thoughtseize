@@ -1,9 +1,12 @@
 package com.miloszjakubanis.thoughtseize.location
 
-import com.miloszjakubanis.thoughtseize.silo.Silo
+import com.miloszjakubanis.thoughtseize.storage.{Storage, FileStorage}
 
 import java.io.File
 import java.nio.file.{Path, Paths}
+import com.miloszjakubanis.thoughtseize.storage.factory.StorageFactory
+import com.miloszjakubanis.thoughtseize.storage.factory.SimpleStorageFactory
+import com.miloszjakubanis.thoughtseize.id.factory.{IDFactory, SimpleIDFactory}
 
 object Location:
 
@@ -18,11 +21,14 @@ object Location:
        case "simple" => SimpleLocationStrategy()
        case _ => SimpleLocationStrategy()
 
-trait Location[T <: Silo[_, _]](private[this] val local: String):
+trait Location[T <: FileStorage[_, _, _]](private[this] val local: String):
+
+  val idFactory: IDFactory = SimpleIDFactory()
 
   lazy val location: String = s"${Location.userHome}/$local"
   lazy val asPath = Paths.get(location).nn
-  lazy val silo: T 
+  lazy val storage: T 
+  lazy val storageFactory: StorageFactory[_]
 
   def dirExists: Boolean =
     if File(location).isDirectory then true

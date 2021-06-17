@@ -1,10 +1,6 @@
-package com.miloszjakubanis.thoughtseize.silo.cache
+package com.miloszjakubanis.thoughtseize.storage.cache
 
-import com.miloszjakubanis.thoughtseize.silo.Sto
+import com.miloszjakubanis.thoughtseize.storage.Storage
 
-trait Cache[K, V] extends Storage[K, V]:
-
-  val cacheLimit: Long
-
-  def getSiloContent(key: K): V
-  val z = 1
+trait Cache[T, T2, T3 <: Long | String] extends Storage[T, T2, T3]:
+  val cacheSizeLimit: Long

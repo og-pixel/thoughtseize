@@ -1,4 +1,7 @@
 package com.miloszjakubanis.thoughtseize.storage
 
-trait Storage[K, V]:
-  def getSiloContent(key: K): V
+trait Storage[T, T2, T3 <: Long | String]:
+  val storage: T
+  def apply: T = storage
+
+  def write(content: T2, index: T3): Option[T2]

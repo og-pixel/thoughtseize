@@ -7,6 +7,7 @@ import java.nio.file.{Path, Paths}
 import com.miloszjakubanis.thoughtseize.storage.factory.StorageFactory
 import com.miloszjakubanis.thoughtseize.storage.factory.SimpleStorageFactory
 import com.miloszjakubanis.thoughtseize.id.factory.{IDFactory, SimpleIDFactory}
+import java.nio.file.Files
 
 object Location:
 
@@ -21,7 +22,9 @@ object Location:
        case "simple" => SimpleLocationStrategy()
        case _ => SimpleLocationStrategy()
 
-trait Location[T <: FileStorage[_, _, _]](private[this] val local: String):
+
+
+trait Location[T <: FileStorage[_, _, _]](local: String):
 
   val idFactory: IDFactory = SimpleIDFactory()
 
@@ -30,9 +33,6 @@ trait Location[T <: FileStorage[_, _, _]](private[this] val local: String):
   lazy val storage: T 
   lazy val storageFactory: StorageFactory[_]
 
-  def dirExists: Boolean =
-    if File(location).isDirectory then true
-    else false
+  private def locationExists: Boolean = Files.exists(asPath)
+  private def createLocationDir: Boolean = Files.createDirectories(asPath) != null
 
-  def createDir(location: String): Boolean =
-    false

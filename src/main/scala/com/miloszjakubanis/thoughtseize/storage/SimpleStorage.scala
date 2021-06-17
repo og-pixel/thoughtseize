@@ -8,6 +8,7 @@ import com.miloszjakubanis.thoughtseize.location.Location
 import java.io.File
 import scala.collection.mutable.HashMap
 import java.nio.file.Files
+import java.nio.file.Path
 
 /**
   * One singular folder holding files inside, no nesting
@@ -15,17 +16,21 @@ import java.nio.file.Files
   */
 class SimpleStorage(
   val id: ID,
-  val siloName: String,
+  val storageName: String,
   val location: Location[_],
-) extends FileStorage[HashMap[String, File], Array[Byte], Long]:
+) extends AbstractFileStorage[HashMap[Long, File], Array[Byte], Long]:
 
-  private[this] val children: HashMap[String, File] = HashMap()
-
-  val storage: HashMap[String, File] = children
+  val storage: HashMap[Long, File] = HashMap()
 
   def write(content: Array[Byte], index: Long): Option[Array[Byte]] = 
-    //TODO check if file exists
-    val path = location.asPath.resolve(siloName).nn
-    val file = Files.createFile(path)
-    Files.write(path, content)
-    Option(content)
+    if keyStorageFileExists(index) 
+    then 
+      Files.write(storagePath.resolve(index.toString), content)
+      Option(content)
+    else 
+      val file = Files.createFile(storagePath.resolve(index.toString))
+      Files.write(storagePath.resolve(index.toString), content)
+      Option(content)
+
+  private[storage] def keyStorageFileExists(key: Long): Boolean = 
+    Files.exists(storagePath.resolve(key.toString))

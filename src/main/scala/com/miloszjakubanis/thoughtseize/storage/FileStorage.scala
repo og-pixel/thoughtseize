@@ -6,14 +6,13 @@ import com.miloszjakubanis.thoughtseize.silo.cache.SimpleCache
 import java.nio.file.Files
 import java.nio.file.Path
 
-trait FileStorage[T, T2, T3 <: Long | String] extends Storage[T, T2, T3]:
+trait FileStorage[T2, T3 <: Long | String] extends Storage[T2, T3]:
 
   val storageName: String
   val location: Location[_]
   val storagePath: Path = location.asPath.resolve(storageName).nn
 
-  val cache: Cache[_, _, _] = SimpleCache()
-
+  val cache: Cache[_, _] = SimpleCache()
 
   private[storage] def createStorageLocation(): Boolean = 
     Files.createDirectories(storagePath) != null

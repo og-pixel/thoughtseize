@@ -22,9 +22,7 @@ object Location:
        case "simple" => SimpleLocationStrategy()
        case _ => SimpleLocationStrategy()
 
-
-
-trait Location[T <: FileStorage[_, _, _]](local: String):
+trait Location[T <: FileStorage[_, _]](local: String):
 
   val idFactory: IDFactory = SimpleIDFactory()
 

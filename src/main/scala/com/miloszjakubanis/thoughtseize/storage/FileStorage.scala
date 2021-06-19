@@ -5,6 +5,7 @@ import com.miloszjakubanis.thoughtseize.storage.cache.Cache
 import com.miloszjakubanis.thoughtseize.silo.cache.SimpleCache
 import java.nio.file.Files
 import java.nio.file.Path
+import com.miloszjakubanis.thoughtseize.jobs.executor.JobExecutor
 
 trait FileStorage[T2, T3 <: Long | String] extends Storage[T2, T3]:
 
@@ -13,6 +14,8 @@ trait FileStorage[T2, T3 <: Long | String] extends Storage[T2, T3]:
   val storagePath: Path = location.asPath.resolve(storageName).nn
 
   val cache: Cache[_, _] = SimpleCache()
+
+  val executor: JobExecutor
 
   private[storage] def createStorageLocation(): Boolean = 
     Files.createDirectories(storagePath) != null

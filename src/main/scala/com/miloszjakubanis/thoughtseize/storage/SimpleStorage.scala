@@ -4,6 +4,7 @@ import com.miloszjakubanis.thoughtseize.id.factory.IDFactory
 import com.miloszjakubanis.thoughtseize.id.ID
 import com.miloszjakubanis.thoughtseize.storage.Storage
 import com.miloszjakubanis.thoughtseize.location.Location
+import com.miloszjakubanis.thoughtseize.jobs.executor.{JobExecutor, SimpleJobExecutor}
 
 import java.io.File
 import scala.collection.mutable.HashMap
@@ -20,6 +21,8 @@ class SimpleStorage(
   val storageName: String,
   val location: Location[_],
 ) extends AbstractFileStorage[Array[Byte], Long]:
+
+  val executor: JobExecutor = SimpleJobExecutor()
 
   def write(content: Array[Byte], index: Long): Option[Array[Byte]] = 
     if keyStorageFileExists(index) 

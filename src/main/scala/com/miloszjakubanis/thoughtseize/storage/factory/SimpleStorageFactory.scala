@@ -13,6 +13,6 @@ class SimpleStorageFactory(val location: Location[_]) extends StorageFactory[Sim
 
   val map = mutable.HashMap[ID, String]()
 
-  def silo(): SimpleStorage = 
-    val id = idFactory.nextID()
-    SimpleStorage(id, id.toString, location)
+  def silo(workerCount: Int): SimpleStorage = 
+    val id = idFactory.nextID
+    SimpleStorage(id, id.toString, location, workerCount)

@@ -21,11 +21,13 @@ class SimpleStorage(
   val id: ID,
   val storageName: String,
   val location: Location[_],
+  val workerCount: Int,
 ) extends AbstractFileStorage[Array[Byte], Long]:
 
-  val executor: JobExecutor = SimpleJobExecutor()
+  val executor: JobExecutor = 
+    SimpleJobExecutor(workerCount)
 
-  def write(content: Array[Byte], index: Long): Option[Array[Byte]] = 
+  override def write(content: Array[Byte], index: Long): Option[Array[Byte]] = 
     if keyStorageFileExists(index) 
     then 
       Files.write(storagePath.resolve(index.toString), content)
@@ -35,7 +37,7 @@ class SimpleStorage(
       Files.write(storagePath.resolve(index.toString), content)
       Option(content)
 
-  def append(content: Array[Byte], index: Long): Option[Array[Byte]] = 
+  override def append(content: Array[Byte], index: Long): Option[Array[Byte]] = 
     if keyStorageFileExists(index) 
     then 
       Files.write(storagePath.resolve(index.toString), content, StandardOpenOption.APPEND)

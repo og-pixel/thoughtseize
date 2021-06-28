@@ -9,11 +9,14 @@ import com.miloszjakubanis.thoughtseize.id.factory.SimpleIDFactory
 
 class SimpleLocationStrategy(
   folderName: String = ".filesystem",
+  workerCount: Int
   ) extends Location[SimpleStorage](folderName):
 
-  lazy val storageFactory: StorageFactory[SimpleStorage] = SimpleStorageFactory(this)
+  lazy val storageFactory: StorageFactory[SimpleStorage] = 
+    SimpleStorageFactory(this)
+
   lazy val storage: SimpleStorage = 
-    val id = idFactory.nextID()
-    SimpleStorage(id, id.toString, this)
+    val id = idFactory.nextID
+    SimpleStorage(id, id.toString, this, workerCount)
 
   

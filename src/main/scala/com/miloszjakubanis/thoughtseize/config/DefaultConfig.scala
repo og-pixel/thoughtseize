@@ -9,6 +9,7 @@ object DefaultConfig {
   private[this] val CONFIG_DEFAULTS = immutable.HashMap[String, Array[String]](
     "config.location" -> Array("simple", "docker"),
     "config.user" -> Array("default"),
+    "config.workers" -> Array("5"),
   )
 
   private[this] val conf = ConfigFactory.load().nn

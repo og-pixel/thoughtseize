@@ -2,7 +2,7 @@ package com.miloszjakubanis.thoughtseize.storage
 
 import com.miloszjakubanis.thoughtseize.location.Location
 import com.miloszjakubanis.thoughtseize.storage.cache.Cache
-import com.miloszjakubanis.thoughtseize.silo.cache.SimpleCache
+import com.miloszjakubanis.thoughtseize.storage.cache.SimpleCache
 import java.nio.file.Files
 import java.nio.file.Path
 import com.miloszjakubanis.thoughtseize.jobs.executor.JobExecutor
@@ -33,5 +33,5 @@ trait FileStorage[T2, T3 <: Long | String] extends Storage[T2, T3]:
 
   private[storage] def fileExists(path: Path): Boolean = Files.exists(path)
 
-  def start: Unit =
-    executor.start()
+  // def start: Unit =
+  //   executor.start()

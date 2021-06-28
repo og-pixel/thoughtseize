@@ -10,6 +10,5 @@ trait Job[In, Out] extends Thread:
   val results: Seq[Out]
   val repeat: Boolean
 
-  def run(): Unit
-
+  override def run(): Unit = executeJob
   def executeJob: Out

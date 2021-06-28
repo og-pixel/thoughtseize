@@ -12,4 +12,4 @@ class PrintingJob(val content: String, val repeat: Boolean = false) extends Job[
     Thread.sleep(2000)
     function(content)
 
-  override def run(): Unit = executeJob
+//   override def run(): Unit = executeJob

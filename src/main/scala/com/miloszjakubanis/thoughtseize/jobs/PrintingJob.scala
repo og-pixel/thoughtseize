@@ -1,6 +1,7 @@
 package com.miloszjakubanis.thoughtseize.jobs
 
 import scala.collection.mutable.ArraySeq
+import com.miloszjakubanis.thoughtseize.jobs.factory.SimpleJobFactory
 
 class PrintingJob(val content: String, val repeat: Boolean = false) extends Job[String, Unit]:
 

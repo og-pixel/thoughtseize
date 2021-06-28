@@ -1,5 +1,8 @@
 package com.miloszjakubanis.thoughtseize.jobs
 
+import com.miloszjakubanis.thoughtseize.jobs.factory.JobFactory
+import com.miloszjakubanis.thoughtseize.jobs.factory.SimpleJobFactory
+
 
 trait Job[In, Out] extends Thread:
 
@@ -11,4 +14,5 @@ trait Job[In, Out] extends Thread:
   val repeat: Boolean
 
   override def run(): Unit = executeJob
+
   def executeJob: Out

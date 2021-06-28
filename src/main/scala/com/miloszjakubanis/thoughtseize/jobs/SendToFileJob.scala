@@ -3,7 +3,11 @@ package com.miloszjakubanis.thoughtseize.jobs
 import com.miloszjakubanis.thoughtseize.storage.{Storage, SimpleStorage}
 import com.miloszjakubanis.thoughtseize.location.Location
 
-class SendToFileJob(val content: Array[Byte], val simpleStorage: Storage[Array[Byte], Long], val key: Long) extends Job[Array[Byte], Unit]:
+class SendToFileJob(
+  val content: Array[Byte],
+  val simpleStorage: Storage[Array[Byte], Long],
+  val key: Long
+) extends StorageJob[Array[Byte], Unit](simpleStorage):
 
   def executeJob: Unit = 
     function(content)

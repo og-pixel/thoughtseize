@@ -11,6 +11,7 @@ import scala.collection.mutable.HashMap
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.StandardOpenOption
+import com.miloszjakubanis.thoughtseize.jobs.PrintingJob
 
 /**
   * One singular folder holding files inside, no nesting

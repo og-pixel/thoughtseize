@@ -32,3 +32,6 @@ trait FileStorage[T2, T3 <: Long | String] extends Storage[T2, T3]:
       case s: String => Files.createFile(location.asPath.resolve(s)) != null
 
   private[storage] def fileExists(path: Path): Boolean = Files.exists(path)
+
+  def start: Unit =
+    executor.start()

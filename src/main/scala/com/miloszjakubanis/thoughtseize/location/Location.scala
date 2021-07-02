@@ -32,10 +32,9 @@ trait Location[T <: FileStorage[_, _]](val local: String):
   lazy val storage: T 
   lazy val storageFactory: StorageFactory[_]
 
-  def runJob(job: Job[_, _]): Unit =
-    storage.executor.addJob(job)
-  
-  
+  //TODO delete, user should run jobs
+  // def runJob(job: Job[_, _]): Unit =
+  //   storage.executor.addJob(job)
 
   private def locationExists: Boolean = Files.exists(asPath)
   private def createLocationDir: Boolean = Files.createDirectories(asPath) != null

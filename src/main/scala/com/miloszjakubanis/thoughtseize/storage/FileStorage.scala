@@ -15,7 +15,8 @@ trait FileStorage[T2, T3 <: Long | String] extends Storage[T2, T3]:
 
   val cache: Cache[_, _] = SimpleCache()
 
-  val executor: JobExecutor
+  //TODO remove, will be in User trait
+  // val executor: JobExecutor
 
   private[storage] def createStorageLocation(): Boolean = 
     Files.createDirectories(storagePath) != null

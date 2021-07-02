@@ -24,8 +24,8 @@ class SimpleStorage(
   val workerCount: Int,
 ) extends AbstractFileStorage[Array[Byte], Long]:
 
-  val executor: JobExecutor = 
-    SimpleJobExecutor(workerCount)
+  // val executor: JobExecutor = 
+  //   SimpleJobExecutor(workerCount)
 
   override def write(content: Array[Byte], index: Long): Option[Array[Byte]] = 
     if keyStorageFileExists(index) 

@@ -7,23 +7,27 @@ import com.miloszjakubanis.thoughtseize.config.DefaultConfig
 import com.miloszjakubanis.thoughtseize.location.*
 import com.miloszjakubanis.thoughtseize.jobs.{SimpleJob, PrintingJob}
 import com.miloszjakubanis.thoughtseize.jobs.SendToFileJob
+import com.miloszjakubanis.thoughtseize.user.User
+import com.miloszjakubanis.thoughtseize.user.factory.SimpleUserFactory
+import com.miloszjakubanis.thoughtseize.jobs.executor.SimpleJobExecutor
 
 given Conversion[String, Array[Byte]] with
   def apply(s: String): Array[Byte] = s.getBytes.nn
 
 @main def hello =
-
   val location = Location(
     DefaultConfig("config.location"),
     DefaultConfig("config.workers").toInt
   ).asInstanceOf[SimpleLocationStrategy]
 
-  for(i <- 1 to 1000)
-    location.runJob(SendToFileJob(s"Hello world from job $i!\n", location.storage, 1))
-    location.runJob(SendToFileJob(s"Hello world from job $i!\n", location.storage, 2))
-    location.runJob(SendToFileJob(s"Hello world from job $i!\n", location.storage, 3))
-    location.runJob(SendToFileJob(s"Hello world from job $i!\n", location.storage, 4))
-    location.runJob(SendToFileJob(s"Hello world from job $i!\n", location.storage, 5))
+  val factory = SimpleUserFactory()
+  val user: User = factory.nextUser("jakubek278", SimpleJobExecutor())
 
-  location.storage.executor.shutdown()
-  location.storage.executor
+  user.addJob(PrintingJob("Hello world - this is a printing job"))
+  val result = user.addJob(PrintingJob("Hello world - Thats a second printing job"))
+
+
+  Thread.sleep(4000)
+  user.jobExecutor.shutdown()
+
+  System.exit(0)

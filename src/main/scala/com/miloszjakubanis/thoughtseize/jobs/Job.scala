@@ -6,12 +6,10 @@ import com.miloszjakubanis.thoughtseize.jobs.factory.SimpleJobFactory
 
 trait Job[In, Out] extends Thread:
 
-  val function: (In => Out)
   val timeLimit: Long = 100
-  var jobState: JobState = JobState.PREPARING
 
+  val function: (In => Out)
   val results: Seq[Out]
-  val repeat: Boolean
 
   override def run(): Unit = executeJob
 

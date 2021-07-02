@@ -13,14 +13,12 @@ trait JobExecutor(private val workerCount: Int):
   private val jobExecutionLimit: Long = 1000
   private val maximumWorkingThreads = 1
 
-  val cache: Cache[_, _]
-
   protected[jobs] val executorService = Executors.newFixedThreadPool(workerCount).nn
 
   def shutdown(): Unit = executorService.shutdown()
   def shutdownNow(): Unit = executorService.shutdownNow()
 
   //TODO return type
-  def addJob(job: Job[_, _]): Unit = 
+  def addJob(job: Job[_, _]): Seq[_] = 
     executorService.submit(job)
-    // storage.addOne(job)
+    job.results

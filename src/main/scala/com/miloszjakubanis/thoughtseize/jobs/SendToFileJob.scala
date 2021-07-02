@@ -16,6 +16,4 @@ class SendToFileJob(
     simpleStorage.append(content, key)
   )
     
-  val repeat: Boolean = false
-
   val results: Seq[Unit] = Seq()

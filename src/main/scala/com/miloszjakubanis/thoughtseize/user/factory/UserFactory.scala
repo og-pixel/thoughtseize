@@ -7,4 +7,4 @@ import com.miloszjakubanis.thoughtseize.jobs.executor.JobExecutor
 
 trait UserFactory:
   val idFactory: IDFactory = SimpleIDFactory()
-  def nextUser(userName: String, jobExecutor: JobExecutor): User
+  def nextUser(userName: String): User

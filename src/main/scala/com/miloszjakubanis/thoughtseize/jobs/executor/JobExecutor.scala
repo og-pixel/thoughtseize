@@ -19,6 +19,5 @@ trait JobExecutor(private val workerCount: Int):
   def shutdownNow(): Unit = executorService.shutdownNow()
 
   //TODO return type
-  def addJob(job: Job[_, _]): Seq[_] = 
+  def addJob(job: Job[_, _]): Unit = 
     executorService.submit(job)
-    job.results

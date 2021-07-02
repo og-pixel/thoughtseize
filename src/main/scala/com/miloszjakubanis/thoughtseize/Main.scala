@@ -10,6 +10,8 @@ import com.miloszjakubanis.thoughtseize.jobs.SendToFileJob
 import com.miloszjakubanis.thoughtseize.user.User
 import com.miloszjakubanis.thoughtseize.user.factory.SimpleUserFactory
 import com.miloszjakubanis.thoughtseize.jobs.executor.SimpleJobExecutor
+import com.miloszjakubanis.thoughtseize.jobs.executor.MainJobExecutor
+import com.miloszjakubanis.thoughtseize.user.SimpleUser
 
 given Conversion[String, Array[Byte]] with
   def apply(s: String): Array[Byte] = s.getBytes.nn
@@ -20,14 +22,15 @@ given Conversion[String, Array[Byte]] with
     DefaultConfig("config.workers").toInt
   ).asInstanceOf[SimpleLocationStrategy]
 
-  val factory = SimpleUserFactory()
-  val user: User = factory.nextUser("jakubek278", SimpleJobExecutor())
+  val main = MainJobExecutor(
+    new SimpleUserFactory()
+  )
 
-  user.addJob(PrintingJob("Hello world - this is a printing job"))
-  val result = user.addJob(PrintingJob("Hello world - Thats a second printing job"))
+  main.createUser("Milosz")
+  Thread.sleep(1000)
 
+  val user = main.findUser("Milosz").get
 
-  Thread.sleep(4000)
-  user.jobExecutor.shutdown()
+  main.submitJob(user, PrintingJob(s"Hello world from ${user.userName}"))
 
-  System.exit(0)
+  main.shutdown()

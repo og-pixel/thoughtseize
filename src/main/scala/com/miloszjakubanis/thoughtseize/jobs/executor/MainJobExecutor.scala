@@ -30,3 +30,11 @@ class MainJobExecutor(
 
   def submitJob(user: User, job: Job[_, _]): Unit = 
     user.jobExecutor.addJob(job)
+   
+  override def shutdown(): Unit = 
+    userList.foreach(e => e.jobExecutor.shutdown())
+    super.shutdown()
+
+  override def shutdownNow(): Unit =
+    userList.foreach(e => e.jobExecutor.shutdownNow())
+    super.shutdownNow()

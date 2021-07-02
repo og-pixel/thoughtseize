@@ -16,6 +16,7 @@ trait JobExecutor(private val workerCount: Int):
   protected[jobs] val executorService = Executors.newFixedThreadPool(workerCount).nn
 
   def shutdown(): Unit = executorService.shutdown()
+
   def shutdownNow(): Unit = executorService.shutdownNow()
 
   //TODO return type

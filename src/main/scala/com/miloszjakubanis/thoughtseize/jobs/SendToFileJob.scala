@@ -17,3 +17,5 @@ class SendToFileJob(
   )
     
   val results: Seq[Unit] = Seq()
+
+  override def run() = executeJob

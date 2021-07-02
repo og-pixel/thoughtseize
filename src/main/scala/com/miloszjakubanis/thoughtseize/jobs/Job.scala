@@ -4,7 +4,7 @@ import com.miloszjakubanis.thoughtseize.jobs.factory.JobFactory
 import com.miloszjakubanis.thoughtseize.jobs.factory.SimpleJobFactory
 
 
-trait Job[In, Out] extends Thread:
+trait Job[In, Out] extends Runnable:
 
   val timeLimit: Long = 100
   val function: (In => Out)

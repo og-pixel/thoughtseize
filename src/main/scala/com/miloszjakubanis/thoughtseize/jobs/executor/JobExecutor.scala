@@ -11,7 +11,6 @@ import com.miloszjakubanis.thoughtseize.storage.cache.Cache
 trait JobExecutor(private val workerCount: Int):
 
   private val jobExecutionLimit: Long = 1000
-  private val maximumWorkingThreads = 1
 
   protected[jobs] val executorService = Executors.newFixedThreadPool(workerCount).nn
 

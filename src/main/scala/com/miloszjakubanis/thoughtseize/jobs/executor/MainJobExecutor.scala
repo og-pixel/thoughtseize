@@ -5,13 +5,14 @@ import com.miloszjakubanis.thoughtseize.user.User
 import com.miloszjakubanis.thoughtseize.jobs.SimpleJob
 import com.miloszjakubanis.thoughtseize.jobs.Job
 import scala.collection.mutable.ArrayBuffer
-import com.miloszjakubanis.thoughtseize.storage.cache.SimpleCache
+import com.miloszjakubanis.thoughtseize.storage.cache.{Cache, SimpleCache}
 
 class MainJobExecutor(
   val userFactory: UserFactory,
 ) extends JobExecutor(1):
 
-  val userList: ArrayBuffer[User] = ArrayBuffer()
+  //TODO too generic
+  val userList: Cache[User] = SimpleCache[User]()
 
   def createUser(userName: String): Unit =
     //TODO delete thread.sleep
@@ -19,7 +20,7 @@ class MainJobExecutor(
       Thread.sleep(100)
       f.nextUser(userName)
     }
-    addJob(SimpleJob[UserFactory, User](userFactory, fun, userList))
+    addJob(SimpleJob[UserFactory, User](userFactory, 1, fun, userList))
   
 
   def findUser(name: String): Option[User] =

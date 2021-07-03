@@ -2,19 +2,21 @@ package com.miloszjakubanis.thoughtseize.storage.cache
 
 import com.miloszjakubanis.thoughtseize.storage.cache.Cache
 import scala.collection.mutable.ArrayBuffer
+import scala.collection.mutable.Seq
 
-class SimpleCache extends Cache[Array[Byte], Long]:
+class SimpleCache[A] extends Cache[Seq[A]]:
 
   val cacheSizeLimit: Long = 1 << 10
 
-  private[this] val storage: ArrayBuffer[Byte] = ArrayBuffer()
+  //TODO this variable name is misleading
+  private[this] val storage: Seq[A] = Seq()
   
-  def write(content: Array[Byte], index: Long): Option[Array[Byte]] = 
+  def write(content: Seq[A], index: Long): Option[Seq[A]] = 
     //TODO check if successful
-    storage ++= content
-    Option(storage.toArray)
+    storage :++ content
+    Option(storage)
   
-  def append(content: Array[Byte], index: Long): Option[Array[Byte]] = 
+  def append(content: Seq[A], index: Long): Option[Seq[A]] = 
     //TODO check if successful
-    storage ++= content
-    Option(storage.toArray)
+    storage :++ content
+    Option(storage)

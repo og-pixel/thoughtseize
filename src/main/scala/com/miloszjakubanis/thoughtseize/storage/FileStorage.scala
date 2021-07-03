@@ -13,7 +13,8 @@ trait FileStorage[T2, T3 <: Long | String] extends Storage[T2, T3]:
   val location: Location[_]
   val storagePath: Path = location.asPath.resolve(storageName).nn
 
-  val cache: Cache[_, _] = SimpleCache()
+  //TOOD make sure it is T2 that I want as a parameter
+  val cache: Cache[_] = SimpleCache[T2]()
 
   //TODO remove, will be in User trait
   // val executor: JobExecutor

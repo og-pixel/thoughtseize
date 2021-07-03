@@ -8,9 +8,4 @@ class PrintingJob(val content: String) extends Job[String, Unit]:
   val function: (String => Unit) = println(_)
   val results: Seq[Unit] = Seq()
 
-  def executeJob: Unit = 
-    // println(s"started: ${this.toString}")
-    // Thread.sleep(2000)
-    function(content)
-
-  override def run(): Unit = executeJob
+  override def run(): Unit = function(content)

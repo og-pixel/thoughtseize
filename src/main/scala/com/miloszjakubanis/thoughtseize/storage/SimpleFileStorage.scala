@@ -17,7 +17,7 @@ import com.miloszjakubanis.thoughtseize.jobs.PrintingJob
   * One singular folder holding files inside, no nesting
   * Depends on a lock to keep everything in right order
   */
-class SimpleStorage(
+class SimpleFileStorage(
   val id: ID,
   val storageName: String,
   val location: Location[_],

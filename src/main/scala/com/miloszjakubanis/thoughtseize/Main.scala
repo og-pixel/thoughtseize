@@ -12,6 +12,8 @@ import com.miloszjakubanis.thoughtseize.user.factory.SimpleUserFactory
 import com.miloszjakubanis.thoughtseize.jobs.executor.SimpleJobExecutor
 import com.miloszjakubanis.thoughtseize.jobs.executor.MainJobExecutor
 import com.miloszjakubanis.thoughtseize.user.SimpleUser
+import scala.sys.ShutdownHookThread
+import com.miloszjakubanis.thoughtseize.jobs.ShutdownJob
 
 given Conversion[String, Array[Byte]] with
   def apply(s: String): Array[Byte] = s.getBytes.nn

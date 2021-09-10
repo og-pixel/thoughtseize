@@ -1,7 +1,7 @@
 lazy val SCALA_3 = "3.0.0"
 
 lazy val thoughtseize: Project = Project("thoughtseize", file("."))
-//  .enablePlugins(MdocPlugin)
+  .dependsOn(vial)
   .settings(
     name := "Thoughtseize",
     organizationName := "Milosz Jakubanis",
@@ -22,5 +22,7 @@ lazy val thoughtseize: Project = Project("thoughtseize", file("."))
       "-Ysafe-init",
       "-new-syntax",
     )
-    
   )
+
+      
+lazy val vial = RootProject(uri("git://github.com/og-pixel/aether-vial.git"))

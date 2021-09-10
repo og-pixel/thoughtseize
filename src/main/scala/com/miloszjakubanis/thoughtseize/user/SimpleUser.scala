@@ -6,6 +6,7 @@ import com.miloszjakubanis.thoughtseize.jobs.executor.{JobExecutor, SimpleJobExe
 class SimpleUser(
   val userId: ID,
   val userName: String,
+  val workerCount: Int = 3,
 ) extends User:
 
-  val jobExecutor: JobExecutor = SimpleJobExecutor()
+  val jobExecutor: JobExecutor = SimpleJobExecutor(workerCount)

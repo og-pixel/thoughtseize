@@ -6,13 +6,14 @@ import com.miloszjakubanis.thoughtseize.jobs.SimpleJob
 import com.miloszjakubanis.thoughtseize.jobs.Job
 import scala.collection.mutable.ArrayBuffer
 import com.miloszjakubanis.thoughtseize.storage.cache.{Cache, SimpleCache}
+import scala.collection.mutable.Seq
 
 class MainJobExecutor(
   val userFactory: UserFactory,
-) extends JobExecutor(1):
+) extends JobExecutor(5):
 
   //TODO too generic
-  val userList: Cache[User] = SimpleCache[User]()
+  val userList: Cache[Seq[User]] = SimpleCache[User]()
 
   def createUser(userName: String): Unit =
     //TODO delete thread.sleep
@@ -24,7 +25,7 @@ class MainJobExecutor(
   
 
   def findUser(name: String): Option[User] =
-    for(user <- userList)
+    for(user <- userList.cache)
       if user.userName == name then return Option(user)
     Option.empty
 
@@ -33,9 +34,9 @@ class MainJobExecutor(
     user.jobExecutor.addJob(job)
    
   override def shutdown(): Unit = 
-    userList.foreach(e => e.jobExecutor.shutdown())
+    userList.cache.foreach(e => e.jobExecutor.shutdown())
     super.shutdown()
 
-  override def shutdownNow(): Unit =
-    userList.foreach(e => e.jobExecutor.shutdownNow())
+  override def shutdownNow(): Unit = ()
+    userList.cache.foreach(e => e.jobExecutor.shutdownNow())
     super.shutdownNow()

@@ -20,3 +20,7 @@ class SimpleCache[A] extends Cache[Seq[A]]:
     //TODO check if successful
     storage :++ content
     Option(storage)
+  
+  def read(index: Long): Option[Seq[A]] = ???
+
+  def cache: Seq[A] = storage

@@ -49,3 +49,7 @@ class SimpleFileStorage(
 
   private[storage] def keyStorageFileExists(key: Long): Boolean = 
     Files.exists(storagePath.resolve(key.toString))
+
+
+  def read(index: Long): Option[Array[Byte]] = 
+    Option(Files.readAllBytes(storagePath.resolve(index.toString)).nn)

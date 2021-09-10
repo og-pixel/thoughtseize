@@ -4,3 +4,4 @@ import com.miloszjakubanis.thoughtseize.storage.Storage
 
 trait Cache[T2] extends Storage[T2, Long]:
   val cacheSizeLimit: Long
+  def cache: T2

@@ -13,7 +13,10 @@ import com.miloszjakubanis.thoughtseize.jobs.executor.SimpleJobExecutor
 import com.miloszjakubanis.thoughtseize.jobs.executor.MainJobExecutor
 import com.miloszjakubanis.thoughtseize.user.SimpleUser
 import scala.sys.ShutdownHookThread
-import com.miloszjakubanis.thoughtseize.jobs.ShutdownJob
+import scala.concurrent.Future
+import java.net.URL
+
+//import com.miloszjakubanis.`aether-vial`.AbstractJob
 
 given Conversion[String, Array[Byte]] with
   def apply(s: String): Array[Byte] = s.getBytes.nn
@@ -24,15 +27,33 @@ given Conversion[String, Array[Byte]] with
     DefaultConfig("config.workers").toInt
   ).asInstanceOf[SimpleLocationStrategy]
 
-  val main = MainJobExecutor(
-    new SimpleUserFactory()
-  )
+  implicit val ec: scala.concurrent.ExecutionContext = scala.concurrent.ExecutionContext.global
+  // val main = MainJobExecutor(
+  //   new SimpleUserFactory()
+  // )
 
-  main.createUser("Milosz")
-  Thread.sleep(1000)
+  // main.createUser("Milosz")
+  // Thread.sleep(1000)
+  // val user = main.findUser("Milosz").get
+  // main.submitJob(user, PrintingJob(s"Hello world from ${user.userName}"))
 
-  val user = main.findUser("Milosz").get
 
-  main.submitJob(user, PrintingJob(s"Hello world from ${user.userName}"))
+  val list = List(1, 2, 3)
+  val listA = List('a', 'b', 'c')
+  
 
-  main.shutdown()
+  val checker: List[String] = listA.flatMap(c => list.map(e => s"$c$e\n"))
+
+  val result = for {
+    ap <- list
+    if ap != 1 
+    az <- listA
+  } yield s"$ap|$az\n"
+
+  println(result.mkString)
+  val aaaa = new URL(
+  
+  // val aaa = new com.miloszjakubanis.`aether-vial`.AbstractJob[String, Unit]("hello world")(Future{println(_)})
+ // val aaa = AbstractJob[String, Int](e => Future{Integer.parseInt(e)})
+
+  // main.shutdown()

@@ -1,7 +1,6 @@
 package com.miloszjakubanis.thoughtseize.config
 
 import com.typesafe.config.ConfigFactory
-import com.miloszjakubanis.thoughtseize.location.Location
 import scala.collection.immutable
 
 object DefaultConfig {

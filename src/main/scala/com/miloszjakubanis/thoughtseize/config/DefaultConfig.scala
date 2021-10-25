@@ -3,6 +3,7 @@ package com.miloszjakubanis.thoughtseize.config
 import com.typesafe.config.ConfigFactory
 import scala.collection.immutable
 
+//TODO most likely to be deleted
 object DefaultConfig {
   //TODO first value is default
   private[this] val CONFIG_DEFAULTS = immutable.HashMap[String, Array[String]](
@@ -13,7 +14,7 @@ object DefaultConfig {
 
   private[this] val conf = ConfigFactory.load().nn
 
-  //TODO made to throw erros on not getting defaults
+  //TODO made to throw errors on not getting defaults
   //TODO breaks if config doesn't exists
   def getOrDefault(key: String): String = 
     conf.getString(key) match 

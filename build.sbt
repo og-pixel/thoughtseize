@@ -1,4 +1,4 @@
-lazy val SCALA_3 = "3.0.0"
+lazy val SCALA_3 = "3.1.0"
 
 lazy val thoughtseize: Project = Project("thoughtseize", file("."))
   .dependsOn(vial)

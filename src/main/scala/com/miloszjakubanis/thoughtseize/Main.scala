@@ -8,7 +8,12 @@ import scala.concurrent.Future
 import java.net.URL
 import com.miloszjakubanis.thoughtseize.storage.{Database, FSDatabase, Location}
 import java.nio.file.{Path, Paths}
+import com.miloszjakubanis.thoughtseize.storage.LocationPlace
+import scala.util.Failure
+import scala.util.Success
 
+// @SerialVersionUID(123L)
+class A(val name: String) extends Serializable:
+  override def toString(): String = name
 @main def hello =
-  val a: Database = new FSDatabase(Location("hello"))
-  a.writeBytes("hello-space2", "ID", "hello world!")
+  val a: Database = new FSDatabase(Location(".thoughtseize", LocationPlace.HOME))

@@ -1,7 +1,10 @@
 lazy val SCALA_3 = "3.1.0"
 
+
+//lazy val vial = RootProject(uri("git://github.com/og-pixel/aether-vial.git"))
+
 lazy val thoughtseize: Project = Project("thoughtseize", file("."))
-  .dependsOn(vial)
+//  .dependsOn(vial)
   .settings(
     name := "Thoughtseize",
     organizationName := "Milosz Jakubanis",
@@ -23,6 +26,3 @@ lazy val thoughtseize: Project = Project("thoughtseize", file("."))
       "-new-syntax",
     )
   )
-
-      
-lazy val vial = RootProject(uri("git://github.com/og-pixel/aether-vial.git"))

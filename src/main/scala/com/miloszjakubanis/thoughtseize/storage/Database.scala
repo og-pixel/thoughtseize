@@ -4,12 +4,9 @@ import scala.util.Try
 import java.io.Serializable
 import java.nio.file.{Path, Paths}
 
+object Database:
 
-// given Conversion[String, Path] with
-//   def apply(s: String): Path = Paths.get(s).nn
-
-// given Conversion[String, Array[Byte]] with
-//   def apply(s: String): Array[Byte] = s.getBytes.nn
+ def apply(): Database = ???
 
 trait Database:
   def writeBytes(namespace: String, id: String, content: Array[Byte]): Try[Unit]

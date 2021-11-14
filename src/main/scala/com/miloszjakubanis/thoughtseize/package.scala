@@ -8,4 +8,3 @@ given Conversion[String, Path] with
 given Conversion[String, Array[Byte]] with
   def apply(s: String): Array[Byte] = s.getBytes.nn
 
-

@@ -12,16 +12,18 @@ object DefaultConfig {
     "config.workers" -> Array("5"),
   )
 
-  private[this] val conf = ConfigFactory.load().nn
+  private[this] val conf = ConfigFactory.load()
 
   //TODO made to throw errors on not getting defaults
   //TODO breaks if config doesn't exists
-  def getOrDefault(key: String): String = 
-    conf.getString(key) match 
-      case s: String => 
-        if CONFIG_DEFAULTS(key).contains(s) then s
-        else CONFIG_DEFAULTS(key).nn(0).nn
-      case _ => CONFIG_DEFAULTS(key).nn(0).nn
+  def getOrDefault(key: String): String = {
+    conf.getString(key) match {
+      case s: String =>
+        if(CONFIG_DEFAULTS(key).contains(s)) s
+        else CONFIG_DEFAULTS(key)(0)
+      case _ => CONFIG_DEFAULTS(key)(0)
+    }
+  }
 
   def apply(key: String): String = getOrDefault(key)
 }

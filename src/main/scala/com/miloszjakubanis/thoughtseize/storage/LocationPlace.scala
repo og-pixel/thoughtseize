@@ -1,4 +1,6 @@
 package com.miloszjakubanis.thoughtseize.storage
 
-enum LocationPlace:
-  case HOME, ROOT, TMP
+object LocationPlace extends Enumeration {
+  type LocationPlace = Value
+  val HOME, ROOT, TMP = Value
+}

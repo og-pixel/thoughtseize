@@ -1,8 +1,11 @@
-lazy val SCALA_3 = "3.1.0"
+import sbt.Credentials
+import sbt.Keys.credentials
+
 lazy val SCALA_2 = "2.13.7"
 
-
-lazy val thoughtseize: Project = project.in(file("."))
+lazy val thoughtseize: Project = project
+  .enablePlugins(PackPlugin, BuildInfoPlugin)
+  .in(file("."))
   .settings(
     name := "Thoughtseize",
     organizationName := "Milosz Jakubanis",
@@ -10,17 +13,30 @@ lazy val thoughtseize: Project = project.in(file("."))
     scalaVersion := SCALA_2,
     organization := "com.miloszjakubanis",
     libraryDependencies ++= Seq(
+      //Logback
+      //Logback
+      "ch.qos.logback" % "logback-classic" % "1.2.6",
+      "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4",
+
+      //Config
       "com.typesafe" % "config" % "1.4.1",
-      "com.lihaoyi" %% "utest" % "0.7.0" % Test
+      "com.lihaoyi" %% "utest" % "0.7.10" % Test,
     ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     scalacOptions ++= Seq(
       "-feature",
-      "-language:implicitConversions",
       "-deprecation",
-      "-unchecked"
-//      "-Yexplicit-nulls",
-//      "-Ysafe-init",
-//      "-new-syntax",
+      "-unchecked",
+      "-language:implicitConversions",
+    ),
+    buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
+
+    resolvers := Seq(
+      "Sonatype Nexus Repository Manager" at s"https://artifact.miloszjakubanis.com/repository/milosz/",
+    ),
+    //Credentials
+    versionScheme := Some("early-semver"),
+    publishMavenStyle := true,
+    credentials += Credentials(new File(Path.userHome.absolutePath + "/.nexus/credentials")),
+    publishTo := Some("Sonatype Snapshots Nexus" at "https://artifact.miloszjakubanis.com/repository/milosz")
     )
-  )

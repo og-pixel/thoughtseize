@@ -12,7 +12,7 @@ class Location(
 
   def apply(): Path = root
 
-  def get = root
+  def get: Path = root
 
   override def toString(): String = root.toString
 }

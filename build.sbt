@@ -11,7 +11,7 @@ lazy val thoughtseize: Project = project.in(file("."))
     organization := "com.miloszjakubanis",
     libraryDependencies ++= Seq(
       "com.typesafe" % "config" % "1.4.1",
-      "com.lihaoyi" %% "utest" % "0.7.10" % Test
+      "com.lihaoyi" %% "utest" % "0.7.0" % Test
     ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     scalacOptions ++= Seq(

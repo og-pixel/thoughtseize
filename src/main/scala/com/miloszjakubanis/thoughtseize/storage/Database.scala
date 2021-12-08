@@ -10,6 +10,8 @@ object Database {
 
 
 trait Database {
+  val location: Location
+
   def writeBytes(namespace: String, id: String, content: Array[Byte]): Try[Unit]
   def writeObject[A <: Serializable](namespace: String, id: String, content: A): Try[Unit]
 

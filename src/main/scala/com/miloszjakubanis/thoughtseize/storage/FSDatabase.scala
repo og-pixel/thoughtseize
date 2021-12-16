@@ -1,13 +1,17 @@
 package com.miloszjakubanis.thoughtseize.storage
 
-import io.circe._
-import io.circe.generic.auto._
-import io.circe.syntax._
-
 import java.io._
 import java.nio.file.{Files, Path}
-import scala.util.control.NonFatal
 import scala.util.{Failure, Success, Try}
+import scala.util.control.NonFatal
+import io.circe._
+import io.circe.generic.auto._
+import io.circe.parser._
+import io.circe.syntax._
+
+import scala.language.implicitConversions
+import scala.reflect.ClassTag
+import scala.reflect.runtime.universe._
 
 class FSDatabase(val location: Location) extends Database {
 
@@ -39,11 +43,12 @@ class FSDatabase(val location: Location) extends Database {
     }
   }
 
-  override def readJson[A](namespace: String, id: String): Try[A] = {
-    val file: Path = location().resolve(namespace).resolve(id)
+  override def readJson[A: Decoder](namespace: String, id: String)(implicit ct: TypeTag[A]): Try[A] = {
+    val file: Path = location().resolve(namespace).resolve(id + ".json")
     try {
       val a = new FileInputStream(file.toString)
-      val res = parser
+
+      val res: A = parser
         .decode[A](new String(a.readAllBytes()))
         .fold(_ => throw new Exception("todo, json parse erorr"), v => v)
 
@@ -91,19 +96,22 @@ class FSDatabase(val location: Location) extends Database {
 
   }
 
-  override def writeJson(
+  override def writeJson[A: Encoder](
       namespace: String,
       id: String,
-      content: String
+      content: A
   ): Try[Unit] = {
-    val file: Path = location().resolve(namespace).resolve(id)
+    val file: Path = location().resolve(namespace).resolve(id + ".json")
     try {
       if (fileExists(file)) throw new IOException("File Already Exists")
       Files.createDirectories(file.getParent)
       if (!Files.exists(file)) Files.createFile(file)
-      val oos = new ObjectOutputStream(new FileOutputStream(file.toString))
-      oos.writeObject(content.asJson.noSpaces)
-      oos.close()
+//      val oos = new ObjectOutputStream(new FileOutputStream(file.toString))
+//      println(s"wrote: ${content.asJson.noSpaces}")
+//      oos.writeObject(content.asJson.noSpaces)
+//      oos.close()
+
+      Files.write(file, content.asJson.noSpaces.getBytes)
       Success(())
     } catch {
       case NonFatal(e) => Failure(e)

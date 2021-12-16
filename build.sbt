@@ -9,7 +9,7 @@ lazy val thoughtseize: Project = project
   .settings(
     name := "Thoughtseize",
     organizationName := "Milosz Jakubanis",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.0.2-SNAPSHOT",
     scalaVersion := SCALA_2,
     organization := "com.miloszjakubanis",
     libraryDependencies ++= Seq(

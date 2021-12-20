@@ -43,7 +43,7 @@ class FSDatabase(val location: Location) extends Database {
     }
   }
 
-  override def readJson[A: Decoder](namespace: String, id: String)(implicit ct: TypeTag[A]): Try[A] = {
+  override def readJson[A: Decoder](namespace: String, id: String): Try[A] = {
     val file: Path = location().resolve(namespace).resolve(id + ".json")
     try {
       val a = new FileInputStream(file.toString)

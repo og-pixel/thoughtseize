@@ -22,7 +22,7 @@ trait Database {
 
   def readBytes(namespace: String, id: String): Try[Array[Byte]]
   //TODO maybe Type A should expect serializable
-  def readJson[A: Decoder](namespace: String, id: String)(implicit ct: TypeTag[A]): Try[A]
+  def readJson[A: Decoder](namespace: String, id: String): Try[A]
   def readObject[A <: Serializable](namespace: String, id: String): Try[A]
 }
 

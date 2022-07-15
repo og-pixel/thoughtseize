@@ -24,7 +24,9 @@ lazy val thoughtseize: Project = project
       //Circe for JSon Parsing
       "io.circe" %% "circe-core" % "0.14.1",
       "io.circe" %% "circe-generic" % "0.14.1",
-      "io.circe" %% "circe-parser" % "0.14.1"
+      "io.circe" %% "circe-parser" % "0.14.1",
+      //New Json Parsing, from Play Framework
+      "com.typesafe.play" %% "play-json" % "2.9.2"
     ),
     testFrameworks += new TestFramework("utest.runner.Framework"),
     scalacOptions ++= Seq(
